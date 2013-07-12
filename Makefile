@@ -268,6 +268,8 @@ ifneq ($(BUILD_CLIENT),0)
     SDL_CFLAGS=$(shell pkg-config --silence-errors --cflags sdl|sed 's/-Dmain=SDL_main//')
     SDL_LIBS=$(shell pkg-config --silence-errors --libs sdl)
     FREETYPE_CFLAGS=$(shell pkg-config --silence-errors --cflags freetype2)
+    OPUS_CFLAGS=$(shell pkg-config --silence-errors --cflags opus opusfile)
+    OPUS_LIBS=$(shell pkg-config --silence-errors --libs opus opusfile)
   endif
   # Use sdl-config if all else fails
   ifeq ($(SDL_CFLAGS),)
@@ -998,7 +1000,8 @@ ifeq ($(USE_CODEC_OPUS),1)
 
     CLIENT_CFLAGS += -I$(OPUSFILEDIR)/include
   else
-    CLIENT_LIBS += -lopusfile -lopus
+    CLIENT_LIBS += $(OPUS_LIBS)
+    CLIENT_CFLAGS += $(OPUS_CFLAGS)
   endif
   NEED_OGG=1
 endif
