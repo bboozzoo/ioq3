@@ -97,7 +97,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ID_INLINE __inline
 #define PATH_SEP '\\'
 
-#if defined( __WIN64__ ) 
+#if defined( __WIN64__ )
 #define ARCH_STRING "x86_64"
 #elif defined _M_ALPHA
 #define ARCH_STRING "AXP"
@@ -193,10 +193,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define ARCH_STRING "ppc64"
 #elif defined __powerpc__
 #define ARCH_STRING "ppc"
-#elif defined __s390__
-#define ARCH_STRING "s390"
 #elif defined __s390x__
 #define ARCH_STRING "s390x"
+#elif defined __s390__
+#define ARCH_STRING "s390"
 #elif defined __ia64__
 #define ARCH_STRING "ia64"
 #elif defined __alpha__
@@ -358,6 +358,9 @@ float FloatSwap (const float *f);
 #if defined( Q3_BIG_ENDIAN ) && defined( Q3_LITTLE_ENDIAN )
 #error "Endianness defined as both big and little"
 #elif defined( Q3_BIG_ENDIAN )
+
+void CopyShortSwap(void *dest, void *src);
+void CopyLongSwap(void *dest, void *src);
 
 #define CopyLittleShort(dest, src) CopyShortSwap(dest, src)
 #define CopyLittleLong(dest, src) CopyLongSwap(dest, src)
